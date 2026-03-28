@@ -84,10 +84,10 @@ export class PolygonShape extends Shape {
 
   /** @hidden */
   static _deserialize(data: any, fixture: any, restore: any): PolygonShape {
-    const vertices: Vec2[] = [];
+    const vertices: Vec2Value[] = [];
     if (data.vertices) {
       for (let i = 0; i < data.vertices.length; i++) {
-        vertices.push(restore(Vec2, data.vertices[i]));
+        vertices.push(data.vertices[i]);
       }
     }
 
