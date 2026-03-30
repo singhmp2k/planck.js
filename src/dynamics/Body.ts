@@ -295,6 +295,7 @@ export class Body {
     return {
       type: this.m_type,
       bullet: this.m_bulletFlag,
+      fixedRotation: this.m_fixedRotationFlag,
       position: this.m_xf.p,
       angle: this.m_xf.q.getAngle(),
       linearVelocity: this.m_linearVelocity,
