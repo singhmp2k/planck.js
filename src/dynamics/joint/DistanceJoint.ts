@@ -183,10 +183,6 @@ export class DistanceJoint extends Joint {
       localAnchorA: this.m_localAnchorA,
       localAnchorB: this.m_localAnchorB,
       length: this.m_length,
-
-      impulse: this.m_impulse,
-      gamma: this.m_gamma,
-      bias: this.m_bias,
     };
   }
 
