@@ -1088,6 +1088,7 @@ export class Body {
 
     const fixture = new Fixture(this, shape, fixdef);
     this._addFixture(fixture);
+    this.m_world.publish("add-fixture", fixture);
     return fixture;
   }
 
