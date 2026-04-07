@@ -81,8 +81,6 @@ export class EdgeShape extends Shape {
 
       vertex0: this.m_vertex0,
       vertex3: this.m_vertex3,
-      hasVertex0: this.m_hasVertex0,
-      hasVertex3: this.m_hasVertex3,
     };
   }
 
