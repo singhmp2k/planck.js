@@ -1,5 +1,18 @@
 # planck
 
+## 1.5.0
+
+### Minor Changes
+
+- 6ede4f3: Publish add-body, add-fixture, add-joint events
+
+### Patch Changes
+
+- 9415379: Add fixedRotation to body serialize
+- 7791ea1: Remove temp fields from distance-joint serialization
+- 86c9079: Remove hasVertex0 and hasVertex3 from serialize Edge
+- 4fc10a7: In polygon and chain \_deserialize use Vec2Value
+
 ## 1.4.3
 
 ### Patch Changes

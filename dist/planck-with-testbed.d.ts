@@ -2110,6 +2110,8 @@ export declare class World {
 	 * Create a joint to constrain bodies together. No reference to the definition
 	 * is retained. This may cause the connected bodies to cease colliding.
 	 *
+	 * Note: creating a joint doesn't wake the bodies.
+	 *
 	 * Warning: This function is locked when a world simulation step is in progress. Use queueUpdate to schedule a function to be called after the step.
 	 */
 	createJoint<T extends Joint>(joint: T): T | null;
@@ -2185,12 +2187,18 @@ export declare class World {
 	 * Warning: You cannot create/destroy world entities inside these callbacks.
 	 */
 	on(name: "post-solve", listener: (contact: Contact, impulse: ContactImpulse) => void): World;
-	/** Listener is called whenever a body is removed. */
+	/** Listener is called when a body is removed. */
 	on(name: "remove-body", listener: (body: Body$1) => void): World;
-	/** Listener is called whenever a joint is removed implicitly or explicitly. */
+	/** Listener is called when a joint is removed implicitly or explicitly. */
 	on(name: "remove-joint", listener: (joint: Joint) => void): World;
-	/** Listener is called whenever a fixture is removed implicitly or explicitly. */
+	/** Listener is called when a fixture is removed implicitly or explicitly. */
 	on(name: "remove-fixture", listener: (fixture: Fixture) => void): World;
+	/** Listener is called when a body is added. */
+	on(name: "add-body", listener: (body: Body$1) => void): World;
+	/** Listener is called when a joint is added. */
+	on(name: "add-joint", listener: (joint: Joint) => void): World;
+	/** Listener is called when a fixture is added. */
+	on(name: "add-fixture", listener: (fixture: Fixture) => void): World;
 	off(name: "begin-contact", listener: (contact: Contact) => void): World;
 	off(name: "end-contact", listener: (contact: Contact) => void): World;
 	off(name: "pre-solve", listener: (contact: Contact, oldManifold: Manifold) => void): World;
@@ -2198,6 +2206,9 @@ export declare class World {
 	off(name: "remove-body", listener: (body: Body$1) => void): World;
 	off(name: "remove-joint", listener: (joint: Joint) => void): World;
 	off(name: "remove-fixture", listener: (fixture: Fixture) => void): World;
+	off(name: "add-body", listener: (body: Body$1) => void): World;
+	off(name: "add-joint", listener: (joint: Joint) => void): World;
+	off(name: "add-fixture", listener: (fixture: Fixture) => void): World;
 	publish(name: string, arg1?: any, arg2?: any, arg3?: any): number;
 }
 export type DataType = any;

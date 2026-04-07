@@ -2,7 +2,7 @@
   typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.planck = {}));
 })(this, (function(exports2) {
   "use strict";/**
- * Planck.js v1.4.3
+ * Planck.js v1.5.0
  * @license The MIT license
  * @copyright Copyright (c) 2026 Erin Catto, Ali Shakiba
  *
@@ -2503,6 +2503,7 @@
         return {
           type: this.m_type,
           bullet: this.m_bulletFlag,
+          fixedRotation: this.m_fixedRotationFlag,
           position: this.m_xf.p,
           angle: this.m_xf.q.getAngle(),
           linearVelocity: this.m_linearVelocity,
@@ -2962,6 +2963,7 @@
         }
         var fixture = new Fixture(this, shape, fixdef);
         this._addFixture(fixture);
+        this.m_world.publish("add-fixture", fixture);
         return fixture;
       };
       Body2.prototype.destroyFixture = function(fixture) {
@@ -6128,6 +6130,7 @@
         }
         this.m_bodyList = body;
         ++this.m_bodyCount;
+        this.publish("add-body", body);
       };
       World2.prototype.createBody = function(arg1, arg2) {
         if (this.isLocked()) {
@@ -6245,6 +6248,7 @@
             }
           }
         }
+        this.publish("add-joint", joint);
         return joint;
       };
       World2.prototype.destroyJoint = function(joint) {
@@ -6652,9 +6656,7 @@
           vertex1: this.m_vertex1,
           vertex2: this.m_vertex2,
           vertex0: this.m_vertex0,
-          vertex3: this.m_vertex3,
-          hasVertex0: this.m_hasVertex0,
-          hasVertex3: this.m_hasVertex3
+          vertex3: this.m_vertex3
         };
       };
       EdgeShape2._deserialize = function(data) {
@@ -6842,7 +6844,7 @@
         var vertices = [];
         if (data.vertices) {
           for (var i = 0; i < data.vertices.length; i++) {
-            vertices.push(restore(Vec2, data.vertices[i]));
+            vertices.push(data.vertices[i]);
           }
         }
         var shape = new ChainShape2(vertices, data.isLoop);
@@ -7021,7 +7023,7 @@
         var vertices = [];
         if (data.vertices) {
           for (var i = 0; i < data.vertices.length; i++) {
-            vertices.push(restore(Vec2, data.vertices[i]));
+            vertices.push(data.vertices[i]);
           }
         }
         var shape = new PolygonShape2(vertices);
@@ -7446,10 +7448,7 @@
           dampingRatio: this.m_dampingRatio,
           localAnchorA: this.m_localAnchorA,
           localAnchorB: this.m_localAnchorB,
-          length: this.m_length,
-          impulse: this.m_impulse,
-          gamma: this.m_gamma,
-          bias: this.m_bias
+          length: this.m_length
         };
       };
       DistanceJoint2._deserialize = function(data, world, restore) {
